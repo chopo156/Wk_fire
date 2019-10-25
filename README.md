@@ -3,6 +3,7 @@ Firescript for vRP and Stand alone
 
 ADD: TriggerServerEvent("Fire-EMS-Pager:PageTones", {"Tone"}, false) -- "medical", "rescue", "fire", "other"
 to get the tone call
+
 ADD: TriggerServerEvent("fire:syncedAlarm") -- Starts fire alarm
 
 --------------------------------------------------------------------------------------------------

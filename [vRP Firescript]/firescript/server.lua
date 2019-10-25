@@ -1,50 +1,34 @@
 print("Fire Script has loaded! Coded by Wick")
 
--- RegisterServerEvent("lol:startfire")
--- AddEventHandler("lol:startfire", function( x , y , z , args, p)
-	-- TriggerClientEvent("chatMessage", p, "LOL ", {255, 0, 0}, "it got to server.")
-	-- maxChilds = args[1]
-	-- isGas = args[2]
-	-- gasFire = false
-	-- if (isGas == 1) then
-		-- gasFire = true
-	-- end
-	-- TriggerClientEvent("chatMessage", p, "INFO", {255, 0, 0}, tostring(y))
-	-- TriggerClientEvent("chatMessage", p, "INFO", {255, 0, 0}, tostring(maxChilds))
-	-- TriggerClientEvent("chatMessage", p, "INFO", {255, 0, 0}, tostring(gasFire))
-	-- StartScriptFire(x, y, z, maxChilds, gasFire)
--- end)
-RegisterServerEvent('fire:chatAlert2')
-AddEventHandler('fire:chatAlert2', function( text )  
-    TriggerClientEvent('chatMessage2', -1, 'FIRE', {255, 0, 0}, 'Der er opdaget en brand ved: ' .. text)
-end)
 RegisterServerEvent('fire:chatAlert')
 AddEventHandler('fire:chatAlert', function( text )  
     TriggerClientEvent('meleeInProgress', -1, 'FIRE', {255, 0, 0}, 'Der er opdaget en brand ved: ' .. text)
+	-- tag det af hvis du vil brug det i chat og det anden ud 
+	--TriggerClientEvent('chatMessage', -1, 'FIRE', {255, 0, 0}, 'Der er opdaget en brand ved: ' .. text)
 end)
- RegisterServerEvent("lol:firesyncs")
- AddEventHandler("lol:firesyncs", function( firec, lastamnt, deletedfires, original )
+ RegisterServerEvent("WK:firesyncs")
+ AddEventHandler("WK:firesyncs", function( firec, lastamnt, deletedfires, original )
 	--local test = ping
-	TriggerClientEvent("lol:firesyncs2", -1, firec, lastamnt, deletedfires, original)
-	--TriggerClientEvent("lol:firesync3", -1)
+	TriggerClientEvent("WK:firesyncs2", -1, firec, lastamnt, deletedfires, original)
+	--TriggerClientEvent("WK:firesync3", -1)
  end)
-  RegisterServerEvent("lol:fireremovesyncs2")
- AddEventHandler("lol:fireremovesyncs2", function( firec, lastamnt, deletedfires, original )
+  RegisterServerEvent("WK:fireremovesyncs2")
+ AddEventHandler("WK:fireremovesyncs2", function( firec, lastamnt, deletedfires, original )
 	--local test = ping
-	TriggerClientEvent("lol:fireremovesync", -1, firec, lastamnt, deletedfires, original)
+	TriggerClientEvent("WK:fireremovesync", -1, firec, lastamnt, deletedfires, original)
  end)
- RegisterServerEvent("lol:firesyncs60")
- AddEventHandler("lol:firesyncs60", function()
+ RegisterServerEvent("WK:firesyncs60")
+ AddEventHandler("WK:firesyncs60", function()
 	--local test = ping
-	--TriggerClientEvent("lol:firesyncs2", -1, firec, lastamnt, deletedfires, original)
-	TriggerClientEvent("lol:firesync3", -1)
+	--TriggerClientEvent("WK:firesyncs2", -1, firec, lastamnt, deletedfires, original)
+	TriggerClientEvent("WK:firesync3", -1)
  end)
-  RegisterServerEvent("lol:removefires")
- AddEventHandler("lol:removefires", function( x, y, z, i )
+  RegisterServerEvent("WK:removefires")
+ AddEventHandler("WK:removefires", function( x, y, z, i )
 	local test = i
 	--local test = ping
-	TriggerClientEvent("lol:fireremovess", -1, x, y, z, test)
-	--TriggerClientEvent("lol:firesync3", -1)
+	TriggerClientEvent("WK:fireremovess", -1, x, y, z, test)
+	--TriggerClientEvent("WK:firesync3", -1)
  end)
  RegisterServerEvent("fire:syncedAlarm")
 AddEventHandler("fire:syncedAlarm", function()
@@ -61,29 +45,29 @@ AddEventHandler("chatMessage", function(p, color, msg)
        --[[ if cmd == "/fire423" then
 			TriggerClientEvent("chatMessage", p, "FIRE ", {255, 0, 0}, "Du startede en brand! ")
                 local fireamnt = cmd[2]
-        	TriggerClientEvent("lol:firethings", p)
+        	TriggerClientEvent("WK:firethings", p)
         	CancelEvent()
         end]]
         if cmd == "/firestop" then
 			TriggerClientEvent("chatMessage", p, "FIRE ", {255, 0, 0}, "Du stoppede alle brande!")
-        	TriggerClientEvent("lol:firestop", p)
-			TriggerClientEvent("lol:firesync", -1)
+        	TriggerClientEvent("WK:firestop", p)
+			TriggerClientEvent("WK:firesync", -1)
         	CancelEvent()
         end
        --[[ if cmd == "/coor098ds" then
-        	TriggerClientEvent("lol:coords", p)
+        	TriggerClientEvent("WK:coords", p)
         	CancelEvent()
         end]]
 		if cmd == "/firecount" then
-        	TriggerClientEvent("lol:firecounter", p)
+        	TriggerClientEvent("WK:firecounter", p)
         	CancelEvent()
         end
         if cmd == "/cbomb" then
-        	TriggerClientEvent("lol:carbomb", p)
+        	TriggerClientEvent("WK:carbomb", p)
         	CancelEvent()
         end
 		if cmd == "/sync" then
-        	TriggerClientEvent("lol:firesync3", p)
+        	TriggerClientEvent("WK:firesync3", p)
 			CancelEvent()
         end
     end
@@ -103,7 +87,7 @@ end
 ------------------------------------------------------------
 ----------------------- RANDOM FIRES -----------------------
 ------------------------------------------------------------
-RegisterServerEvent("lol:amfireman")
+RegisterServerEvent("WK:amfireman")
 
 local spawnRandomFires = true -- set to true and put x,y,z locations and amount of time before their is a chance of a fire spawning
 local spawnRandomFireChance = 750 -- basically a thousand sided dice is rolled and if it gets above this number then a fire spawns at one of the locations specified
@@ -120,11 +104,11 @@ local function randomFireAttempt()
 	else
 		print("Tilfældig brand starter...")
 		local event
-		event = AddEventHandler("lol:amfireman",function()
+		event = AddEventHandler("WK:amfireman",function()
 			if event then
 				RemoveEventHandler(event)
 				event = nil
-				TriggerClientEvent("lol:random",source)
+				TriggerClientEvent("WK:random",source)
 				SetTimeout(randomSpawnTime,randomFireAttempt)
 				--print("[FIRE] "..(GetPlayerName(source) or "???").." vil klar det.")
 			end
@@ -137,7 +121,7 @@ local function randomFireAttempt()
 				print("[FIRE] Nevermind, ingen brandmænd!")
 			end
 		end)
-		TriggerClientEvent("lol:askfireman",-1)
+		TriggerClientEvent("WK:askfireman",-1)
 	end
 end
 math.randomseed(os.time())

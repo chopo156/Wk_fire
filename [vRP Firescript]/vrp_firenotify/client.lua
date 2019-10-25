@@ -1,9 +1,9 @@
 vRP = Proxy.getInterface("vRP")
-vRPclient = Tunnel.getInterface("vRP","vrp_outlawalert")
+vRPclient = Tunnel.getInterface("vRP","vrp_firenotify")
 vRPl = {}
-Lserver = Tunnel.getInterface("vrp_outlawalert","vrp_outlawalert")
-vRPl = Tunnel.getInterface("vrp_outlawalert","vrp_outlawalert")
-Tunnel.bindInterface("vrp_outlawalert",vRPl)
+Lserver = Tunnel.getInterface("vrp_firenotify","vrp_firenotify")
+vRPl = Tunnel.getInterface("vrp_firenotify","vrp_firenotify")
+Tunnel.bindInterface("vrp_firenotify",vRPl)
 
 
 function Isems()
@@ -13,7 +13,7 @@ function Isems()
     end)
 end
 
--- outlawalert_client.lua
+-- Fire call
 RegisterNetEvent('FirePlacing') -- adicione esse evento
 AddEventHandler('FirePlacing', function(gx, gy, gz)
         local transM = 250

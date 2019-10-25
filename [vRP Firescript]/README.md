@@ -1,15 +1,15 @@
 # Wk_fire
 Firescript only vRP
 
-Resources:
+# Resources:
 
-# start vrp_firenotify
+start vrp_firenotify
 
-# start WK_fire
+start WK_fire
 
-# start inferno-fire-ems-pager
+start inferno-fire-ems-pager
 
-# start inferno-fire-alarm
+start inferno-fire-alarm
 
 ADD: TriggerServerEvent("Fire-EMS-Pager:PageTones", {"Tone"}, false) -- "medical", "rescue", "fire", "other"
 to get the tone call

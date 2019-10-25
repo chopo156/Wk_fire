@@ -5,7 +5,7 @@ Firescript only vRP
 
 start vrp_firenotify
 
-start WK_fire
+start WK_fire  // firescript
 
 start inferno-fire-ems-pager
 

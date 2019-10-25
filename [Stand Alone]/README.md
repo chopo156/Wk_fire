@@ -2,6 +2,17 @@
 Firescript Stand Alone
 Does not work for vRP
 
+# Resources
+
+start firenotify
+
+start firescript
+
+start inferno-fire-ems-pager
+
+start inferno-fire-alarm
+
+--------------------------------------------------------------------------------------------------------
 ADD: TriggerServerEvent("Fire-EMS-Pager:PageTones", {"Tone"}, false) -- "medical", "rescue", "fire", "other"
 to get the tone call
 

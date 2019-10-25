@@ -3,15 +3,12 @@ local Proxy = module("vrp", "lib/Proxy")
 
 vRPl = {}
 vRP = Proxy.getInterface("vRP")
-vRPclient = Tunnel.getInterface("vRP","vrp_outlawalert")
-Lclient = Tunnel.getInterface("vrp_outlawalert","vrp_outlawalert")
-Tunnel.bindInterface("vrp_outlawalert",vRPl)
+vRPclient = Tunnel.getInterface("vRP","vrp_firenotify")
+Lclient = Tunnel.getInterface("vrp_firenotify","vrp_firenotify")
+Tunnel.bindInterface("vrp_firenotify",vRPl)
 
---cfg = {}
---cfg.tilladelse = "wk.fire"; -- Indtast her tilladelse, som dine Firefighter har. [!]
-
-
-function getOnDutyfire() -- function used to return the user id of the police group in a table
+---------------------------------------------------------------------------------------------------
+function getOnDutyfire() -- funktion brugt til at returnere bruger-id for firegruppen i en tabel
 	local users = vRP.getUsersByPermission({"wk.fire"})
 
 	 for k, v in pairs(users) do
@@ -32,7 +29,7 @@ AddEventHandler('fireInProgress', function(street1, street2)
 	local Firefighter = getOnDutyfire()	
 	
 	if user_id == Firefighter then
-			vRPclient.notify(user_id,{"~r~Der er opdaget en brand ved ~w~"..street1.."~r~ og ~w~"..street2})
+		vRPclient.notify(user_id,{"~r~Der er opdaget en brand ved ~w~"..street1.."~r~ og ~w~"..street2})
 	end		
 end)
 
@@ -42,7 +39,7 @@ AddEventHandler('fireInProgressS1', function(street2)
 	local Firefighter = getOnDutyfire()	
 	
 	if user_id == Firefighter then
-			vRPclient.notify(user_id,{"~r~Der er opdaget en brand ved ~w~"..street2})
+		vRPclient.notify(user_id,{"~r~Der er opdaget en brand ved ~w~"..street2})
 	end		
 end)
 
@@ -52,7 +49,7 @@ AddEventHandler('fireInProgressPos', function(gx, gy, gz)
 	local Firefighter = getOnDutyfire()	
 	
 	if user_id == Firefighter then
-			print(string.format("Brand rapporteret %.2f, %.2f, %.2f.",gx,gy,gz))
-			TriggerClientEvent('FirePlacing', -1, gx, gy, gz)
+		print(string.format("Brand rapporteret %.2f, %.2f, %.2f.",gx,gy,gz))
+		TriggerClientEvent('FirePlacing', -1, gx, gy, gz)
 	end		
 end)

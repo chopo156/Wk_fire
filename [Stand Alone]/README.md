@@ -9,6 +9,7 @@ ADD: TriggerServerEvent("fire:syncedAlarm") -- Starts fire alarm
 
 --------------------------------------------------------------------------------------------------
 ADD: inferno-fire-alarm
+
 ADD: inferno-fire-ems-pager
 
 

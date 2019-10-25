@@ -78,32 +78,32 @@ AddEventHandler("triggerSound", function()
 end)
 
 local reportFire = function(x,y,z)
-	--msg(string.format("FIRE AT %.2f, %.2f, %.2f.",x,y,z),3000)
+	--msg(string.format("BRAND PÅ %.2f, %.2f, %.2f.",x,y,z),3000)
 	--xpcall(function()
 		local s1, s2 = Citizen.InvokeNative( 0x2EB41072B4C1E4C0, x, y, z, Citizen.PointerValueInt(), Citizen.PointerValueInt() )
-		TriggerServerEvent('fireInProgressPos', x, y, z)
-		--msg("Yes it fucking triggered, just to be sure.")
+		TriggerServerEvent('fireInProgressPos', x, y, z) -- køre til vrp_firenotify
+		--msg("Ja det fucking udløst, bare for at være sikker.")
 		if s2 == 0 then
-			TriggerServerEvent('fireInProgressS1', GetStreetNameFromHashKey(s1))
+			TriggerServerEvent('fireInProgressS1', GetStreetNameFromHashKey(s1)) -- køre til vrp_firenotify
 		else
-			TriggerServerEvent("fireInProgress", GetStreetNameFromHashKey(s1), GetStreetNameFromHashKey(s2))
+			TriggerServerEvent("fireInProgress", GetStreetNameFromHashKey(s1), GetStreetNameFromHashKey(s2)) -- køre til vrp_firenotify
 		end
     --end,function(m)
-	--	msg(debug.traceback("FAILURE: "..tostring(m).."."))
+	--	msg(debug.traceback("FIASKO: "..tostring(m).."."))
 	--end)
 end
 ----------------------Trigger ved brandmand på/af --------------------------------
-RegisterNetEvent("lol:askfireman")
-RegisterNetEvent("lol:random")
-AddEventHandler("lol:askfireman",function()
-	TriggerServerEvent("lol:amfireman")
+RegisterNetEvent("WK:askfireman")
+RegisterNetEvent("WK:random")
+AddEventHandler("WK:askfireman",function()
+	TriggerServerEvent("WK:amfireman")
 end)
 
 ------------------------------------------------------------
 ----------------------- RANDOM FIRES -----------------------
 ------------------------------------------------------------
 
-AddEventHandler("lol:random",function()
+AddEventHandler("WK:random",function()
 	local possibleLocations = #randomFireLocations
 	if possibleLocations == 0 then
 		return
@@ -163,7 +163,7 @@ AddEventHandler("lol:random",function()
 		TriggerServerEvent("fire:syncedAlarm") -- Starts fire alarm
 		TriggerServerEvent("Fire-EMS-Pager:PageTones", {"fire"}, false) -- add PageTones {"medical", "rescue", "fire", "other"}
 	end
-	TriggerServerEvent("lol:firesyncs", firec, lastamnt, deletedfires, original)
+	TriggerServerEvent("WK:firesyncs", firec, lastamnt, deletedfires, original)
 	reportFire(x,y,z)
 end)
 
@@ -198,8 +198,8 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("lol:firethings")
-AddEventHandler("lol:firethings", function()
+RegisterNetEvent("WK:firethings")
+AddEventHandler("WK:firethings", function()
 	local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 	FSData.removeallfires = false
     local coordis = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
@@ -245,7 +245,7 @@ AddEventHandler("lol:firethings", function()
 			deletedfires[i] = FSData.deletedfires[i]
 		end
 		local original = tostring(FSData.originalfiremaker)
-		TriggerServerEvent("lol:firesyncs", firec, lastamnt, deletedfires, original)
+		TriggerServerEvent("WK:firesyncs", firec, lastamnt, deletedfires, original)
                 
         
         if chatStreetAlerts == true then
@@ -263,8 +263,8 @@ end)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("lol:firestop")
-AddEventHandler("lol:firestop", function()
+RegisterNetEvent("WK:firestop")
+AddEventHandler("WK:firestop", function()
 		for i=1,#fireremover do
 		     RemoveScriptFire(fireremover[i])
 		end
@@ -279,8 +279,8 @@ AddEventHandler("lol:firestop", function()
 		fireremoverParticles = {}
 		fireremover = {}
 end)
-RegisterNetEvent("lol:fireremovesync")
-AddEventHandler("lol:fireremovesync", function( firec, lastamnt, deletedfires, original )
+RegisterNetEvent("WK:fireremovesync")
+AddEventHandler("WK:fireremovesync", function( firec, lastamnt, deletedfires, original )
 		
 			FSData.originalfiremaker = original
 			
@@ -302,8 +302,8 @@ end)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("lol:firesyncs2")
-AddEventHandler("lol:firesyncs2", function( firec, lastamnt, deletedfires, original )
+RegisterNetEvent("WK:firesyncs2")
+AddEventHandler("WK:firesyncs2", function( firec, lastamnt, deletedfires, original )
 		
 			FSData.originalfiremaker = original
 			
@@ -316,7 +316,7 @@ AddEventHandler("lol:firesyncs2", function( firec, lastamnt, deletedfires, origi
 			for i=1,#deletedfires do
 					FSData.deletedfires[i] = deletedfires[i]
 			end
-				TriggerServerEvent("lol:firesyncs60")
+				TriggerServerEvent("WK:firesyncs60") -- bug
 end)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -325,8 +325,8 @@ end)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("lol:test2")
-AddEventHandler("lol:test2", function( test )
+RegisterNetEvent("WK:test2")
+AddEventHandler("WK:test2", function( test )
 		TriggerEvent("chatMessage", "FIRE", {255, 0, 0},"test string: " .. tostring(test))
 end)
 function firehelper(fireremover)
@@ -342,8 +342,8 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("lol:coords")
-AddEventHandler("lol:coords", function()
+RegisterNetEvent("WK:coords")
+AddEventHandler("WK:coords", function()
 		local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
                 TriggerEvent("chatMessage", "Coords", {255, 0, 0},"X: " .. tostring(x) .. " Y: " .. tostring(y) .. " Z: " .. tostring(z))
 				
@@ -356,8 +356,8 @@ end)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("lol:firecounter")
-AddEventHandler("lol:firecounter", function()
+RegisterNetEvent("WK:firecounter")
+AddEventHandler("WK:firecounter", function()
 		local counter = 0
 		for i=1,#FSData.lastamnt do
 			if FSData.lastamnt[i-1] == 20 or  FSData.lastamnt[i-1] == 1 then
@@ -374,8 +374,8 @@ end)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("lol:firesync3")
-AddEventHandler("lol:firesync3", function()
+RegisterNetEvent("WK:firesync3")
+AddEventHandler("WK:firesync3", function()
 	for i=1,#FSData.lastamnt do
 		if FSData.lastamnt[i-1] == 20 then
 	
@@ -402,8 +402,8 @@ end)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("lol:carbomb")
-AddEventHandler("lol:carbomb", function()
+RegisterNetEvent("WK:carbomb")
+AddEventHandler("WK:carbomb", function()
 	FSData.removeallfires = false
 		
 	local vehicle = GetPlayersLastVehicle()
@@ -456,9 +456,9 @@ AddEventHandler("lol:carbomb", function()
 		deletedfires[i] = FSData.deletedfires[i]
 	end
 	local original = tostring(FSData.originalfiremaker)
-	TriggerServerEvent("lol:firesyncs", firec, lastamnt, deletedfires, original)
+	TriggerServerEvent("WK:firesyncs", firec, lastamnt, deletedfires, original)
     if chatStreetAlerts == true then
-        --chatAlerts(x, y, z)
+        chatAlerts(x, y, z)
 		TriggerServerEvent("fire:syncedAlarm") -- Starts fire alarm
 		TriggerServerEvent("Fire-EMS-Pager:PageTones", {"fire"}, true, {"Brand i en bil"}) -- add PageTones {"medical", "rescue", "fire", "other"}
     end
@@ -471,8 +471,8 @@ end)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("lol:firesync")
-AddEventHandler("lol:firesync", function()
+RegisterNetEvent("WK:firesync")
+AddEventHandler("WK:firesync", function()
 
 		local removedFires = FSData.removeallfires
 		local fireCoords = FSData.firecoords
@@ -502,7 +502,7 @@ AddEventHandler("lol:firesync", function()
 			end
 			
 				local original = tostring(FSData.originalfiremaker)
-				TriggerServerEvent("lol:firesyncs", firec, lastamnt, deletedfires, original)
+				TriggerServerEvent("WK:firesyncs", firec, lastamnt, deletedfires, original)
 		end
 		
 		
@@ -517,8 +517,8 @@ end)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent("lol:fireremovess")
-AddEventHandler("lol:fireremovess", function( x, y, z, test )
+RegisterNetEvent("WK:fireremovess")
+AddEventHandler("WK:fireremovess", function( x, y, z, test )
 		
 	local l = test
 		
@@ -535,70 +535,6 @@ AddEventHandler("lol:fireremovess", function( x, y, z, test )
 	end
 		
 end)
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
---------------------------------------------------------- Thread to handle spawning initial fire ---------------------------------------------------------
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------
---[[
-Citizen.CreateThread(function() 
-	while true do 
-		Citizen.Wait(0)
-		if IsControlJustPressed(1, 28) then -- button f7
-			FSData.originalfiremaker = tostring(GetPlayerPed(-1))
-				
-			local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-			local coords = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-                                          
-                
-			if not HasNamedPtfxAssetLoaded("core") then
-				RequestNamedPtfxAsset("core")
-				while not HasNamedPtfxAssetLoaded("core") do
-					Wait(1)
-				end
-			end
-			SetPtfxAssetNextCall("core")
-			
-			
-		
-			table.insert(FSData.lastamnt, 20)
-		
-           	local rand = math.random(1, 200)
-			if rand > 100 then
-				table.insert(FSData.lastamnt, StartParticleFxLoopedAtCoord("ent_ray_heli_aprtmnt_l_fire", x+5, y, z-0.7, 0.0, 0.0, 0.0, 1.0, false, false, false, false))
-			else
-				table.insert(FSData.lastamnt, StartParticleFxLoopedAtCoord("ent_ray_heli_aprtmnt_h_fire", x+5, y, z-0.7, 0.0, 0.0, 0.0, 1.0, false, false, false, false))
-			end
-			table.insert(FSData.lastamnt, x+5)
-      		table.insert(FSData.lastamnt, y)
-           	table.insert(FSData.lastamnt, z-0.7)
-		
-           	table.insert(fireremover, StartScriptFire (x+5, y, z-0.8, 25, false))
-           	table.insert(fireremover, x+5)
-           	table.insert(fireremover, y)
-           	table.insert(fireremover, z-0.8)
-			local firec = {}
-			local lastamnt = {}
-			local deletedfires = {}
-			for i=1,#FSData.firecoords do
-				firec[i] = FSData.firecoords[i]
-			end
-			for i=1,#FSData.lastamnt do
-				lastamnt[i] = FSData.lastamnt[i]
-			end
-			for i=1,#FSData.deletedfires do
-				deletedfires[i] = FSData.deletedfires[i]
-			end
-			local original = tostring(FSData.originalfiremaker)
-			if chatStreetAlerts == true then
-            	chatAlerts(x, y, z)
-        	end
-			TriggerServerEvent("lol:firesyncs", firec, lastamnt, deletedfires, original)
-			Citizen.Wait(2000)
-		end
-	end 
-end)]]
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -637,7 +573,7 @@ Citizen.CreateThread(function()
 					--if FSData.originalfiremaker == tostring(GetPlayerPed(-1)) then					
                     	if GetNumberOfFiresInRange(x, y, z, 1) == 0 then
 							if GetNumberOfFiresInRange(x, y, z, 1) == 0 then
-								TriggerServerEvent("lol:removefires", x, y, z, i)							
+								TriggerServerEvent("WK:removefires", x, y, z, i)							
 							end
                    		end
 					--end
@@ -685,7 +621,7 @@ Citizen.CreateThread(function()
 			end
 	
 				local original = tostring(FSData.originalfiremaker)
-				TriggerServerEvent("lol:firesyncs", firec, lastamnt, deletedfires, original)
+				TriggerServerEvent("WK:firesyncs", firec, lastamnt, deletedfires, original)
 				end
 						end
                    

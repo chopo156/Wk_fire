@@ -1,20 +1,24 @@
 # Wk_fire
-Firescript only vRP
 
-# Resources:
+Firescript only FOR vRP (Danish)
 
-start vrp_firenotify
+how to:
 
-start WK_fire  // firescript
+chatAlert can be chatMessage or use vrp_firenotify  in server.lua  ( see in  line 5 and 7 )
 
-start inferno-fire-ems-pager
+you can start a fire in server.lua ( [[-- it out in line 45 and 50 --]] )
 
-start inferno-fire-alarm
+or use /cbomb
 
-ADD: TriggerServerEvent("Fire-EMS-Pager:PageTones", {"Tone"}, false) -- "medical", "rescue", "fire", "other"
-to get the tone call
+ADD: TriggerServerEvent("Fire-EMS-Pager:PageTones", {"Tone"}, false)
 
-ADD: TriggerServerEvent("fire:syncedAlarm") -- Starts fire alarm
+to get the tone call (see in client line 164)
+
+ADD: TriggerServerEvent("fire:syncedAlarm")
+
+to get the alarm call (see in client line 163)
+
+ADD: firehose (under test)
 
 --------------------------------------------------------------------------------------------------
 ADD: inferno-fire-alarm

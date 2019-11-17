@@ -22,7 +22,7 @@ Config.ChatSuggestions = true
 Config.Reminder = true
 -- Whether or not to enable command whitelist.
 -- "ace" to use Ace permissions, "json" to use whitelist.json file, or false to disable.
-Config.WhitelistEnabled = false
+Config.WhitelistEnabled = "json"
 -- Separator character, goes between tones and details in /page command
 Config.PageSep = "-"
 -- Default fire department name, used in /page command

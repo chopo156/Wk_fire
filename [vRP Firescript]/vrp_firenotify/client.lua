@@ -4,10 +4,10 @@ vRPl = {}
 Lserver = Tunnel.getInterface("vrp_firenotify","vrp_firenotify")
 vRPl = Tunnel.getInterface("vrp_firenotify","vrp_firenotify")
 Tunnel.bindInterface("vrp_firenotify",vRPl)
-------------------------------------------------------------------------------------------------------------------------------------
 
--- Fire call
-RegisterNetEvent('FirePlacing') -- tilføj denne begivenhed
+
+-- FirePlacing
+RegisterNetEvent('FirePlacing') -- adicione esse evento
 AddEventHandler('FirePlacing', function(gx, gy, gz)
         local transM = 250
     local fireBlip = AddBlipForCoord(gx, gy, gz)

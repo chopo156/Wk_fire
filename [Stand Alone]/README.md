@@ -1,13 +1,11 @@
 # Wk_fire
 Firescript Stand Alone
-Does not work for vRP
 
-ADD: TriggerServerEvent("Fire-EMS-Pager:PageTones", {"Tone"}, false) -- "medical", "rescue", "fire", "other"
-to get the tone call
+Does not work for vRP!!
 
-ADD: TriggerServerEvent("fire:syncedAlarm") -- Starts fire alarm
 --------------------------------------------------------------------------------------------------
 ADD: inferno-fire-alarm
+
 ADD: inferno-fire-ems-pager
 
 
